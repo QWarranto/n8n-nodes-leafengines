@@ -1,0 +1,16 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Soil layers -->
+  <rect x="8" y="40" width="48" height="16" fill="#8D6E63" rx="4"/>
+  <rect x="12" y="32" width="40" height="12" fill="#A1887F" rx="3"/>
+  <rect x="16" y="24" width="32" height="10" fill="#BCAAA4" rx="2"/>
+  
+  <!-- Plant growing from soil -->
+  <path d="M32,24 L28,16 L32,12 L36,16 Z" fill="#81C784"/>
+  <path d="M32,20 Q30,18 28,16 Q30,14 32,12 Q34,14 36,16 Q34,18 32,20 Z" fill="#4CAF50"/>
+  
+  <!-- Nutrient indicators -->
+  <circle cx="20" cy="48" r="2" fill="#FFD54F"/>
+  <circle cx="28" cy="44" r="2" fill="#4FC3F7"/>
+  <circle cx="36" cy="48" r="2" fill="#BA68C8"/>
+  <circle cx="44" cy="44" r="2" fill="#FF8A65"/>
+</svg>

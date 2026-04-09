@@ -1,0 +1,16 @@
+<svg width="64" height="64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Green background -->
+  <rect width="64" height="64" fill="#4CAF50" rx="8"/>
+  
+  <!-- Leaf icon -->
+  <path d="M32,16 C40,12 48,16 52,24 C56,32 52,40 44,44 C36,48 28,52 24,56 C20,60 16,56 12,48 C8,40 12,32 20,28 C24,20 28,16 32,16 Z" fill="#81C784"/>
+  
+  <!-- Automation gear overlay -->
+  <circle cx="32" cy="32" r="12" fill="none" stroke="#C8E6C9" stroke-width="2"/>
+  <path d="M32,20 L32,24 M32,40 L32,44 M20,32 L24,32 M40,32 L44,32" stroke="#C8E6C9" stroke-width="2"/>
+  <circle cx="32" cy="32" r="4" fill="#C8E6C9"/>
+  
+  <!-- n8n integration indicator -->
+  <circle cx="48" cy="48" r="6" fill="#FF6B6B" opacity="0.8"/>
+  <text x="48" y="51" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="8" font-weight="bold">n8n</text>
+</svg>
