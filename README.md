@@ -1,375 +1,240 @@
 # n8n-nodes-leafengines
 
-![LeafEngines Logo](https://leafengines.example.com/icon.png)
+[![npm version](https://img.shields.io/npm/v/n8n-nodes-leafengines.svg)](https://www.npmjs.com/package/n8n-nodes-leafengines)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**LeafEngines Agricultural Intelligence nodes for n8n** - Bring patent-pending agricultural intelligence to your business automation workflows.
-
-## 🎯 What This Is
-
-A suite of n8n nodes that connect to the LeafEngines Agricultural Intelligence Platform, providing:
-
-- **Soil Analysis** - USDA soil data, composition, health scoring
-- **Water Quality** - EPA water quality data, contamination risk
-- **Crop Intelligence** - AI-powered planting recommendations, yield predictions
-- **Carbon Credits** - Carbon sequestration estimation, credit calculations
-- **Environmental Intelligence** - Climate insights, sustainability scoring
-
-## ✨ Key Features
-
-### **For Business Automation:**
-- **Tier-Gated Operations** - Free tier + paid tiers ($149–$499/month)
-- **Batch Processing** - Process multiple counties/farms in parallel
-- **Error Handling** - Built-in retry logic, rate limit handling
-- **Data Transformation** - Output formatted for CRM, ERP, farm management systems
-
-### **Integration Capabilities:**
-- **CRM Integration** - Salesforce, HubSpot, Zoho
-- **ERP Integration** - SAP, Oracle, Microsoft Dynamics
-- **Farm Management** - Granular, FarmLogs, Conservis
-- **Data Warehouses** - Snowflake, BigQuery, Redshift
-
-### **Monetization Ready:**
-- **Free Tier** - 100 requests/month, basic features
-- **Starter Tier** - $149/month, 10,000 requests, advanced features
-- **Pro Tier** - $499/month, 100,000 requests, all features + priority support
-- **Enterprise** - Custom pricing, SLA, dedicated support
+**n8n nodes for LeafEngines Agricultural Intelligence API** - Business automation for agriculture. Ported from the successful [Node-RED implementation](https://github.com/QWarranto/node-red-contrib-leafengines).
 
 ## 🚀 Quick Start
 
-### **1. Installation**
+### 1. Installation
 ```bash
+# Install via npm
 npm install n8n-nodes-leafengines
+
+# Or install directly in n8n
+# 1. Go to Settings → Community Nodes
+# 2. Click "Install"
+# 3. Enter: n8n-nodes-leafengines
+# 4. Click "Install"
 ```
 
-### **2. Configure Credentials**
-1. In n8n, go to **Credentials** → **Add Credential**
+### 2. Get Your API Key
+1. Visit [app.soilsidekickpro.com/api-docs](https://app.soilsidekickpro.com/api-docs)
+2. Request a sandbox API key (starts with `ak_sandbox_`)
+3. Receive key via email (typically within a few hours)
+
+### 3. Configure in n8n
+1. Go to **Credentials** → **Add Credential**
 2. Search for "LeafEngines"
-3. Enter your API key (get one at [app.soilsidekickpro.com](https://app.soilsidekickpro.com))
-4. Save credentials
+3. Enter:
+   - **API Key**: Your `ak_sandbox_*` key
+   - **Environment**: Sandbox (for testing)
+   - **Tier**: Free (to start)
 
-### **3. Use Nodes**
-1. Add a new node to your workflow
-2. Search for "LeafEngines"
-3. Choose from: Soil Data, Water Quality, Crop Intelligence, Carbon Credits, Environmental Intelligence
-4. Configure parameters and run
+### 4. Create Your First Workflow
+```
+[Schedule Trigger] → [LeafEngines Soil] → [Google Sheets] → [Email]
+```
 
-## 📋 Available Nodes
+Configure the **LeafEngines Soil** node:
+- **Operation**: Get Soil Composition
+- **County FIPS**: Enter a 5-digit code (e.g., `06019` for Fresno County, CA)
+- **Output Format**: Full Analysis
 
-### **1. LeafEngines (Main Node)**
-- **County Lookup** - Resolve county by name or FIPS code
-- **Get All Data** - Comprehensive agricultural intelligence for a location
-- **Batch Processing** - Process multiple locations in one operation
+## 🚨 **Complete Workflow Example: Property Assessment with Alert System**
 
-### **2. Soil Data Node**
-- **Soil Composition** - Sand, silt, clay percentages
-- **Soil Health Score** - 0-100 health assessment
-- **Nutrient Levels** - N, P, K, pH, organic matter
-- **Erosion Risk** - Wind/water erosion potential
+### **Import this workflow:** `examples/address-soil-impact-alert-airtable.json`
 
-### **3. Water Quality Node**
-- **Water Source Quality** - Surface/groundwater quality scores
-- **Contaminant Levels** - Nitrates, pesticides, heavy metals
-- **Irrigation Suitability** - Water quality for irrigation
-- **Treatment Recommendations** - Water treatment suggestions
+**Complete Environmental Due Diligence Pipeline:**
+```
+Webhook → County Lookup → Soil Analysis → Environmental Impact → Conditional Alert → Airtable
+```
 
-### **4. Crop Intelligence Node**
-- **Planting Recommendations** - Best crops for location/soil
-- **Yield Predictions** - Expected yields with confidence intervals
-- **Growth Stages** - Current/predicted growth stages
-- **Pest/Disease Risk** - Risk assessment for common issues
-
-### **5. Carbon Credits Node**
-- **Carbon Sequestration** - Estimated carbon capture potential
-- **Credit Calculation** - Carbon credit value estimation
-- **Improvement Plans** - Actions to increase carbon capture
-- **Verification Prep** - Data for carbon credit verification
-
-### **6. Environmental Intelligence Node**
-- **Sustainability Score** - 0-100 environmental sustainability
-- **Climate Risk** - Drought, flood, temperature risks
-- **Biodiversity Impact** - Impact on local biodiversity
-- **Regulatory Compliance** - Environmental regulation compliance
-
-## 🔧 Configuration Examples
-
-### **Basic Soil Analysis Workflow:**
-```javascript
-// n8n workflow configuration
+### **Trigger Example:**
+```json
 {
-  "nodes": [
-    {
-      "name": "County Lookup",
-      "type": "n8n-nodes-leafengines.leafEngines",
-      "position": [250, 300],
-      "parameters": {
-        "operation": "countyLookup",
-        "countyName": "Fresno County",
-        "stateCode": "CA"
-      }
-    },
-    {
-      "name": "Soil Analysis",
-      "type": "n8n-nodes-leafengines.soilData",
-      "position": [450, 300],
-      "parameters": {
-        "operation": "getSoilHealth",
-        "fipsCode": "={{ $json.fips }}",
-        "includeRecommendations": true
-      }
-    }
-  ]
+  "address": "123 Rural Rd, Polk County, IA",
+  "lat": 41.6270,
+  "lng": -93.5000
 }
 ```
 
-### **Batch Processing Multiple Farms:**
-```javascript
-{
-  "nodes": [
-    {
-      "name": "Read Farm List",
-      "type": "n8n-nodes-base.readBinaryFile",
-      "parameters": {
-        "filePath": "/data/farms.csv"
-      }
-    },
-    {
-      "name": "Process Each Farm",
-      "type": "n8n-nodes-leafengines.leafEngines",
-      "parameters": {
-        "operation": "batchAnalysis",
-        "items": "={{ $json.data }}",
-        "parallel": 5
-      }
-    }
-  ]
-}
+### **Step-by-Step Processing:**
+
+#### **1. Webhook Trigger**
+- Receives property data from: CRM, mobile app, form submission, IoT device
+- Contains: address, latitude, longitude
+
+#### **2. County Lookup** (Reverse Geocoding)
+- Converts lat/lng → county FIPS code
+- Uses geocoding API (Google Maps, Mapbox, OpenStreetMap)
+
+#### **3. Get Soil Data** (LeafEngines Soil Node)
+- Retrieves USDA soil composition for county
+- Returns: pH, NPK nutrients, organic matter %, drainage class
+
+#### **4. Environmental Impact Analysis** (LeafEngines API)
+- Combines soil data + precise coordinates
+- Returns proprietary scores:
+  - `runoff_risk` (0-100): Water runoff potential
+  - `contamination_risk` (low/medium/high): Pollution risk
+  - `biodiversity_impact`: Ecosystem effect
+  - `carbon_score`: Carbon sequestration potential
+
+#### **5. Conditional Alert System**
+- **If** `contamination_risk = "high"` → Send Slack alert
+- **Alert includes:** Property details, risk scores, coordinates
+- **Team notified immediately** for urgent review
+
+#### **6. Store in Airtable**
+- Complete environmental record
+- All data fields preserved for reporting
+- `alert_sent` flag tracks notification status
+
+### **Business Use Cases:**
+
+#### **Real Estate Due Diligence:**
+```
+Property listing → Automated environmental assessment → Risk alert → Database record
 ```
 
-## 💰 Tier Comparison
-
-| Feature          | Free Tier | Starter ($149/mo) | Pro ($499/mo) |
-|---------          -----------|-------------------|---------------|
-| Monthly Requests | 100       | 10,000            | 100,000       |
-| API Endpoints    | Basic     | All               | All           |
-| Batch Processing | ❌        | ✅ (10 items)     | ✅ (100 items)|
-| Priority Support | ❌        | ✅                | ✅ (24/7)    |
-| SLA              | ❌        | 99%               | 99.9%         |
-| Custom Models.   | ❌        | ❌                | ✅           |
-| Dedicated Support| ❌        | ❌                | ✅           |
-
-## 🎯 Use Cases
-
-### **1. Farm Management Automation:**
+#### **Agricultural Land Purchase:**
 ```
-Farm Data → Soil Analysis → Irrigation Schedule → Equipment Control
+Farm evaluation → Soil analysis → Contamination check → Alert team → Document
 ```
 
-### **2. Carbon Credit Marketplace:**
+#### **Environmental Compliance:**
 ```
-Land Analysis → Carbon Calculation → Credit Listing → Payment Processing
-```
-
-### **3. Agricultural Supply Chain:**
-```
-Field Analysis → Yield Prediction → Inventory Planning → Logistics
+Site inspection → Automated risk assessment → Regulatory reporting → Audit trail
 ```
 
-### **4. Sustainability Reporting:**
+#### **Insurance Underwriting:**
 ```
-Environmental Data → Sustainability Score → ESG Report → Investor Dashboard
-```
-
-### **5. Insurance Risk Assessment:**
-```
-Location Data → Climate Risk → Yield Risk → Premium Calculation
+Property application → Environmental risk scoring → Underwriting decision → Record
 ```
 
-## 🔗 Integration Examples
+### **How to Use This Example:**
 
-### **With Salesforce:**
-```javascript
-// n8n workflow: LeafEngines → Salesforce
-{
-  "nodes": [
-    {
-      "name": "Get Farm Data",
-      "type": "n8n-nodes-leafengines.leafEngines"
-    },
-    {
-      "name": "Update Salesforce",
-      "type": "n8n-nodes-base.salesforce",
-      "parameters": {
-        "operation": "update",
-        "object": "Farm__c",
-        "updateFields": {
-          "Soil_Health__c": "={{ $json.soilHealth }}",
-          "Yield_Prediction__c": "={{ $json.yieldPrediction }}",
-          "Carbon_Potential__c": "={{ $json.carbonPotential }}"
-        }
-      }
-    }
-  ]
-}
-```
+1. **Download the workflow:** `examples/address-soil-impact-alert-airtable.json`
+2. **Import into n8n:** Workflows → Import from File
+3. **Configure credentials:**
+   - Geocoding API (for county lookup)
+   - LeafEngines API (soil + impact analysis)
+   - Slack (for alerts)
+   - Airtable (for database storage)
+4. **Test with sample data**
+5. **Customize for your needs**
 
-### **With Farm Management Software:**
-```javascript
-// n8n workflow: LeafEngines → FarmLogs
-{
-  "nodes": [
-    {
-      "name": "Agricultural Analysis",
-      "type": "n8n-nodes-leafengines.cropIntelligence"
-    },
-    {
-      "name": "Create FarmLogs Task",
-      "type": "n8n-nodes-base.httpRequest",
-      "parameters": {
-        "url": "https://api.farmlogs.com/v2/tasks",
-        "authentication": "genericCredentialType",
-        "sendBody": true,
-        "bodyParameters": {
-          "name": "={{ `Soil Treatment: ${$json.recommendations[0].treatment}` }}",
-          "fieldId": "={{ $json.fieldId }}",
-          "dueDate": "={{ $now.plus(7, 'days').toISO() }}"
-        }
-      }
-    }
-  ]
-}
-```
+## 📊 Available Nodes
+
+### Free Tiere:
+- **LeafEngines Soil** - USDA soil composition and health scoring
+
+### Paid Tiers:
+- LeafEngines Water - EPA water quality monitoring
+- LeafEngines Crop - AI crop recommendations
+- LeafEngines Carbon - Carbon credit calculations
+- LeafEngines Weather - Live weather and soil fusion
+- LeafEngines Batch - Optimized batch processing
+
+## 🎯 Why n8n Over Node-RED?
+
+| Feature | Node-RED | n8n |
+|---------|----------|-----|
+| **Audience** | IoT hobbyists, makers | Business automation, SaaS builders |
+| **Monetization** | Lower willingness to pay | $149–$499/month tiers expected |
+| **Integrations** | IoT devices, MQTT | Salesforce, HubSpot, SAP, ERP systems |
+| **Team Features** | Limited | Workflow sharing, version control, audit trails |
+| **Enterprise Ready** | Basic | SOC 2 compliance, SLA support |
+
+## 📈 Based on Proven Architecture
+
+This n8n package ports the agricultural intelligence algorithms from our Node-RED implementation, adapted for business automation workflows in n8n.
+
+**Includes complete workflow examples for:**
+- Property assessment with environmental risk alerts
+- Farm management automation
+- Soil data integration with business systems
+
+## 💰 Tier Pricing
+
+| Tier | Price | Features | Best For |
+|------|-------|----------|----------|
+| **Free** | $0 | 100 requests/month, soil data | Testing, hobbyists |
+| **Starter** | $149/month | 10,000 requests, all endpoints | Small farms, consultants |
+| **Professional** | $499/month | 100,000 requests, priority support | Enterprises, SaaS builders |
+| **Enterprise** | Custom | Unlimited, SLA, dedicated support | Large corporations |
+
+## 🔧 Technical Compatibility
+
+### **n8n API Version: 1**
+This package uses n8n Nodes API Version 1, introduced in n8n 0.198.0.
+
+### **Minimum Requirements:**
+- **n8n:** 0.198.0 or higher
+- **Node.js:** 16.x or higher
+- **npm:** 7.x or higher
+
+### **Why n8n 0.198.0 Minimum?**
+The node uses these post-0.198.0 APIs:
+- `functionArgs.getNodeParameter()` (not `this.getNodeParameter()`)
+- `await functionArgs.getCredentials()` (async credential handling)
+- `INodeType` / `INodeTypeDescription` interfaces
+- `NodeConnectionType` enumeration
+
+### **Incompatible With:**
+❌ n8n < 0.198.0 (uses deprecated `this.` methods)  
+❌ Node.js < 16.x (n8n requirement)  
+❌ Older credential patterns (sync `getCredentials()`)
 
 ## 🛠️ Development
 
-### **Project Structure:**
-```
-n8n-nodes-leafengines/
-├── credentials/
-│   └── LeafEnginesApi.credentials.ts
-├── nodes/
-│   ├── LeafEngines/
-│   │   ├── LeafEngines.node.ts
-│   │   └── LeafEngines.node.json
-│   ├── SoilData/
-│   ├── WaterQuality/
-│   ├── CropIntelligence/
-│   ├── CarbonCredits/
-│   └── EnvironmentalIntelligence/
-├── package.json
-├── tsconfig.json
-└── README.md
-```
+### From Node-RED to n8n:
+This package directly ports the successful Node-RED implementation:
+- Same API endpoints
+- Same error handling
+- Same tier-gating system
+- Same agricultural intelligence
 
-### **Building:**
+### Building from Source:
 ```bash
+# Clone repository
+git clone https://github.com/QWarranto/n8n-nodes-leafengines.git
+cd n8n-nodes-leafengines
+
 # Install dependencies
 npm install
 
-# Build the package
-npm run build
-
-# Development watch mode
-npm run dev
+# Test in n8n
+cp -r . ~/.n8n/custom/nodes/n8n-nodes-leafengines
 ```
-
-### **Testing:**
-```bash
-# Run tests
-npm test
-
-# Lint code
-npm run lint
-
-# Format code
-npm run format
-```
-
-## 📈 Performance
-
-### **API Response Times:**
-- **Soil Data:** 200-500ms
-- **Water Quality:** 300-600ms
-- **Crop Intelligence:** 400-800ms
-- **Carbon Credits:** 500-1000ms
-- **Batch Processing:** 100ms/item (parallel)
-
-### **Rate Limits:**
-- **Free Tier:** 10 requests/minute
-- **Starter Tier:** 100 requests/minute
-- **Pro Tier:** 1000 requests/minute
-- **Enterprise:** Custom limits
-
-### **Error Handling:**
-- **Automatic retry** on rate limits (3 attempts)
-- **Circuit breaker** on API failures
-- **Fallback caching** for offline scenarios
-- **Detailed error messages** with remediation steps
 
 ## 🆘 Support
 
-### **Documentation:**
-- [API Reference](https://leafengines.example.com/api-docs)
-- [n8n Integration Guide](https://leafengines.example.com/n8n-guide)
-- [Video Tutorials](https://leafengines.example.com/videos)
-- [Example Workflows](https://leafengines.example.com/examples)
-
-### **Community:**
-- [GitHub Discussions](https://github.com/QWarranto/n8n-nodes-leafengines/discussions)
-- [n8n Community Forum](https://community.n8n.io/)
-- [Reddit: r/n8n](https://reddit.com/r/n8n)
-- [Discord](https://discord.gg/leafengines)
-
-### **Support Channels:**
-- **Free Tier:** Community support only
-- **Starter Tier:** Email support (24-hour response)
-- **Pro Tier:** Priority email + chat support (4-hour response)
-- **Enterprise:** Dedicated support manager + SLA
-
-## 🚀 Roadmap
-
-### **v1.0.0 (Current):**
-- Basic nodes for all agricultural intelligence categories
-- Tier-gating implementation
-- Error handling and retry logic
-- Basic documentation
-
-### **v1.1.0 (Q2 2026):**
-- Advanced batch processing
-- Custom model support
-- Enhanced error reporting
-- Performance optimizations
-
-### **v1.2.0 (Q3 2026):**
-- AI Agent integration
-- MCP server compatibility
-- Advanced caching
-- Real-time monitoring
-
-### **v2.0.0 (Q4 2026):**
-- Machine learning predictions
-- Satellite imagery integration
-- Drone data processing
-- Enterprise features
+- **Documentation**: [app.soilsidekickpro.com/api-docs](https://app.soilsidekickpro.com/api-docs)
+- **GitHub Issues**: [github.com/QWarranto/n8n-nodes-leafengines/issues](https://github.com/QWarranto/n8n-nodes-leafengines/issues)
+- **Email**: support@soilsidekickpro.com
+- **Node-RED Reference**: [github.com/QWarranto/node-red-contrib-leafengines](https://github.com/QWarranto/node-red-contrib-leafengines)
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🔗 Links
 
-- **Website:** https://app.soilsidekickpro.com
-- **API Documentation:** https://app.soilsidekickpro.com/api-docs
-- **n8n Registry:** https://n8n.io/integrations/leafengines
-- **GitHub:** https://github.com/QWarranto/n8n-nodes-leafengines
-- **Support:** support@soilsidekickpro.com
+- **Website**: [soilsidekickpro.com](https://soilsidekickpro.com)
+- **Node-RED Package**: [node-red-contrib-leafengines](https://www.npmjs.com/package/node-red-contrib-leafengines)
+- **GitHub**: [github.com/QWarranto/n8n-nodes-leafengines](https://github.com/QWarranto/n8n-nodes-leafengines)
+- **npm**: [npmjs.com/package/n8n-nodes-leafengines](https://www.npmjs.com/package/n8n-nodes-leafengines)
 
 ---
 
-## 🎯 Ready to Automate Agriculture?
+**Ready to automate your agricultural business?** Start with the free tier and scale as needed. 🚀
+## 🔍 Keywords
 
-1. **Install the package:** `npm install n8n-nodes-leafengines`
-2. **Get API key:** [app.soilsidekickpro.com/api-docs](https://app.soilsidekickpro.com/api-docs)
-3. **Build workflows:** Connect agricultural intelligence to your business processes
-4. **Scale:** Start with free tier, upgrade as needed
+**Agricultural Intelligence:** offline-first, USDA soil data, carbon credit calculations, GPS-denied environments, environmental compliance, farm management automation, business workflow integration
 
-**Transform your agricultural business with intelligent automation!**
+**Technical:** n8n nodes, business automation, workflow integration, API integration, agricultural technology
+
+**Use Cases:** farm management, environmental reporting, carbon credit verification, soil health monitoring, precision agriculture
