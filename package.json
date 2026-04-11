@@ -1,21 +1,22 @@
 {
   "name": "n8n-nodes-leafengines",
-  "version": "1.0.0",
-  "description": "LeafEngines Agricultural Intelligence nodes for n8n - Soil analysis, water quality, crop recommendations, carbon credits, and environmental intelligence",
+  "version": "1.0.3",
+  "description": "Agricultural Intelligence for n8n: Soil analysis, water quality monitoring, crop recommendations, carbon credit calculations, weather fusion, and environmental impact assessment",
   "keywords": [
     "n8n-community-node-package",
-    "agriculture",
-    "soil",
+    "agricultural-intelligence",
+    "soil-analysis",
     "water-quality",
-    "crop-intelligence",
+    "crop-recommendations",
     "carbon-credits",
-    "environmental",
-    "farming",
+    "weather-data",
+    "environmental-impact",
     "precision-agriculture",
+    "farm-automation",
     "leafengines"
   ],
   "license": "MIT",
-  "homepage": "https://leafengines.example.com",
+  "homepage": "https://app.soilsidekickpro.com/api-docs",
   "author": {
     "name": "LeafEngines",
     "email": "support@soilsidekickpro.com"
@@ -24,6 +25,7 @@
     "type": "git",
     "url": "git+https://github.com/QWarranto/n8n-nodes-leafengines.git"
   },
+  "type": "commonjs",
   "engines": {
     "node": ">=18.10",
     "n8n": ">=1.0.0"

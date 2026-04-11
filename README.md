@@ -3,7 +3,18 @@
 [![npm version](https://img.shields.io/npm/v/n8n-nodes-leafengines.svg)](https://www.npmjs.com/package/n8n-nodes-leafengines)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**LeafEngines Agricultural Intelligence nodes for n8n** - Business automation for agriculture.
+**Agricultural Intelligence for n8n** - Business automation for precision agriculture.
+
+## 🎯 What This Package Does
+
+Transform n8n into an agricultural intelligence platform with:
+
+- **Soil Analysis** - USDA soil composition, nutrient levels, health scoring
+- **Water Quality Monitoring** - EPA water data, contamination risk assessment
+- **Crop Recommendations** - Location-specific planting advice, yield optimization
+- **Carbon Credit Calculations** - Emissions tracking, sustainability reporting
+- **Weather Data Fusion** - NOAA climate insights, forecast integration
+- **Environmental Impact Assessment** - Sustainability metrics, compliance reporting
 
 ## 🚀 Quick Start
 
@@ -141,5 +152,7 @@ Copyright (c) 2026 SoilSidekick Pro
 
 - **Documentation:** [LeafEngines n8n Integration Guide](https://docs.leafengines.com/n8n)
 - **GitHub Issues:** [Feature Requests & Bugs](https://github.com/QWarranto/n8n-nodes-leafengines/issues)
-- **Email:** support@leafengines.com
+- **Developers:** developers@leafengines.com
+- **OEM Partnerships:** partners@soilsidekickpro.com
+- **Enterprise:** enterprise@soilsidekickpro.com
 - **Community:** [n8n Community Forum](https://community.n8n.io)
