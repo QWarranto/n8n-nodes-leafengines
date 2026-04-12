@@ -116,11 +116,32 @@ Retrieve USDA soil data for any US location.
 
 ## ⚙️ Configuration
 
-### API Access
-- **Free Tier:** 100 requests/month, soil data only
-- **Starter Tier:** 1,000 requests/month, $49/month
-- **Pro Tier:** 10,000 requests/month, $149/month
-- **Enterprise:** Custom volumes, contact sales
+## 💰 Founder Pricing (First 100 Only)
+
+Act now to lock in lifetime rates. After the first 100 founders or 30 days, pricing increases to normal rates.
+
+| Tier | First 30 Days | After 30 Days (Lifetime Lock) | Normal Price |
+|------|--------------|-------------------------------|-------------|
+| **Starter** | $10/mo | $49/mo for life | $149/mo |
+| **Pro** | $49/mo | $149/mo for life | $499/mo |
+
+### Get Started Now
+- **Starter:** [Subscribe for $10/month](https://buy.stripe.com/14A7sL30y8bR2F4fbgaMU02) *(Limited to first 100)*
+- **Pro:** [Subscribe for $49/month](https://buy.stripe.com/cNi3cv1WuajZcfE7IOaMU03) *(Limited to first 100)*
+
+After payment, you'll receive your API key within 24 hours.
+
+### Alternative Payment Methods
+- PayPal: `teamclreg@gmail.com`
+- Cash App: `$Sumer54`
+- Venmo: `@Reginald-Rice`
+- Bitcoin, Ethereum, Solana (addresses provided on request)
+
+## ⚡ Why Act Now?
+
+1. **Be one of the first 100** → Lock in lifetime pricing
+2. **After 100 founders** → Limited incentives remain for 30 days
+3. **After 30 days** → Full pricing, no early advantages
 
 ### Authentication
 1. Request API key from SoilSidekick Pro
