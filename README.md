@@ -24,15 +24,13 @@ npm install n8n-nodes-leafengines
 ```
 
 ### 2. Get Your API Key
-1. **Emergency API (Available Now):** Use test key `leaf-test-370df0a2e62e`
-   - Base URL: `https://leafengines-agricultural-intelligence.onrender.com`
-   - Endpoint: `/v1/soil/analyze`
-   - No signup required - works immediately
+1. **Request an API Key:**
+   - Visit [SoilSidekick Pro API Docs](https://soilsidekickpro.com/api-docs) to request your key
+   - Or comment on our [GitHub API Access Issue](https://github.com/QWarranto/leafengines-claude-mcp/issues) with your name, email, and use case
+   - Receive your key via email within 24 hours
 
-2. **Future Production API (Coming Soon):**
-   - Visit [leafengines.com/api](https://leafengines.com/api) (coming soon)
-   - Request production API key
-   - Receive key via email
+2. **Base URL:**
+   - `https://leafengines-agricultural-intelligence.onrender.com`
 
 ### 3. Configure in n8n
 1. Go to **Credentials** → **Add Credential**
