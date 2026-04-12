@@ -137,6 +137,14 @@ After payment, you'll receive your API key within 24 hours.
 - Venmo: `@Reginald-Rice`
 - Bitcoin, Ethereum, Solana (addresses provided on request)
 
+## 📊 Normal Pricing (After Founder Period)
+
+| Plan | Price | Subscribe |
+|------|-------|-----------|
+| Starter | $149/mo | [Subscribe](https://buy.stripe.com/5kQ6oHcB88bR93s8MSaMU04) |
+| Pro | $499/mo | [Subscribe](https://buy.stripe.com/14A6oH7gO3VBcfE1kqaMU05) |
+| Enterprise | $1,999/mo | [Subscribe](https://buy.stripe.com/eVqaEXfNkajZ6Vk0gmaMU06) |
+
 ## ⚡ Why Act Now?
 
 1. **Be one of the first 100** → Lock in lifetime pricing
