@@ -9,20 +9,19 @@ import {
 import {
 	leafEnginesApiRequest,
 	validateTierAccess,
-	createTierGatedProperty,
 } from '../GenericFunctions';
 
 export class SoilData implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'LeafEngines Soil Data',
-		name: 'soilData',
-		icon: 'file:soil.svg',
+		displayName: 'LeafEngines Soil',
+		name: 'leafEnginesSoil',
+		icon: 'file:leafengines.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
-		description: 'Soil analysis and health assessment',
+		description: 'USDA Soil Composition Analysis - Ported from Node-RED node-red-contrib-leafengines',
 		defaults: {
-			name: 'Soil Data',
+			name: 'LeafEngines Soil',
 		},
 		inputs: [NodeConnectionType.Main],
 		outputs: [NodeConnectionType.Main],
@@ -42,127 +41,87 @@ export class SoilData implements INodeType {
 					{
 						name: 'Get Soil Composition',
 						value: 'getSoilComposition',
-						description: 'Get sand, silt, clay percentages and texture',
-						action: 'Get soil composition',
+						description: 'USDA soil composition by county (sand, silt, clay percentages)',
+						action: 'Get soil composition data',
 					},
 					{
 						name: 'Get Soil Health Score',
 						value: 'getSoilHealth',
-						description: 'Get overall soil health score (0-100)',
+						description: 'Soil health assessment (0-100 score)',
 						action: 'Get soil health score',
 					},
 					{
 						name: 'Get Nutrient Levels',
 						value: 'getNutrientLevels',
-						description: 'Get N, P, K, pH, organic matter levels',
+						description: 'N, P, K, pH, organic matter levels',
 						action: 'Get nutrient levels',
 					},
 					{
 						name: 'Get Erosion Risk',
 						value: 'getErosionRisk',
-						description: 'Get wind and water erosion risk assessment',
-						action: 'Get erosion risk',
+						description: 'Wind/water erosion potential assessment',
+						action: 'Get erosion risk assessment',
 					},
-					createTierGatedProperty(
-						{
-							name: 'Get Soil Recommendations',
-							value: 'getSoilRecommendations',
-							description: 'Get AI-powered soil improvement recommendations (Starter+ tier)',
-							action: 'Get soil recommendations',
-						},
-						['starter', 'pro']
-					),
-				].filter(Boolean) as any[],
+				],
 				default: 'getSoilComposition',
 			},
 			{
-				displayName: 'FIPS Code',
-				name: 'fipsCode',
+				displayName: 'County FIPS Code',
+				name: 'countyFips',
 				type: 'string',
 				default: '',
-				displayOptions: {
-					show: {
-						operation: [
-							'getSoilComposition',
-							'getSoilHealth',
-							'getNutrientLevels',
-							'getErosionRisk',
-							'getSoilRecommendations',
-						],
-					},
-				},
-				description: 'County FIPS code (e.g., "06019" for Fresno County, CA)',
+				required: true,
+				description: '5-digit county FIPS code (e.g., "06019" for Fresno County, CA). Find codes at: https://www.epa.gov/waterdata/fips-code-search',
 			},
 			{
-				displayName: 'County Name',
-				name: 'countyName',
-				type: 'string',
-				default: '',
-				displayOptions: {
-					show: {
-						operation: [
-							'getSoilComposition',
-							'getSoilHealth',
-							'getNutrientLevels',
-							'getErosionRisk',
-							'getSoilRecommendations',
-						],
+				displayName: 'Output Format',
+				name: 'outputFormat',
+				type: 'options',
+				options: [
+					{
+						name: 'Full Analysis',
+						value: 'full',
+						description: 'Complete soil analysis with all data points',
 					},
-				},
-				description: 'Name of the county (required if FIPS not provided)',
+					{
+						name: 'Summary Only',
+						value: 'summary',
+						description: 'Key metrics and health score only (optimized for dashboards)',
+					},
+					{
+						name: 'Minimal Data',
+						value: 'minimal',
+						description: 'Essential data for automation workflows (lightweight)',
+					},
+				],
+				default: 'full',
+				description: 'Level of detail in the API response',
 			},
 			{
-				displayName: 'State Code',
-				name: 'stateCode',
-				type: 'string',
-				default: '',
-				displayOptions: {
-					show: {
-						operation: [
-							'getSoilComposition',
-							'getSoilHealth',
-							'getNutrientLevels',
-							'getErosionRisk',
-							'getSoilRecommendations',
-						],
-					},
-				},
-				description: 'Two-letter state code (required if FIPS not provided)',
-			},
-			{
-				displayName: 'Include Historical Data',
-				name: 'includeHistorical',
+				displayName: 'Include Recommendations',
+				name: 'includeRecommendations',
 				type: 'boolean',
-				default: false,
-				displayOptions: {
-					show: {
-						operation: [
-							'getSoilComposition',
-							'getSoilHealth',
-							'getNutrientLevels',
-						],
-					},
-				},
-				description: 'Whether to include historical soil data trends',
+				default: true,
+				description: 'Whether to include AI-powered soil improvement recommendations',
 			},
 			{
-				displayName: 'Soil Depth (cm)',
-				name: 'soilDepth',
-				type: 'number',
-				default: 30,
-				typeOptions: {
-					minValue: 5,
-					maxValue: 200,
-				},
-				displayOptions: {
-					show: {
-						operation: [
-							'getSoilComposition',
-							'getNutrientLevels',
-						],
+				displayName: 'Cache Behavior',
+				name: 'cacheBehavior',
+				type: 'options',
+				options: [
+					{
+						name: 'Use Cache If Available',
+						value: 'cache',
+						description: 'Return cached data if available (faster)',
 					},
-				},
-				description: 'Soil depth to analyze in centimeters',
+					{
+						name: 'Force Fresh Data',
+						value: 'fresh',
+						description: 'Always fetch fresh data from source (slower)',
+					},
+				],
+				default: 'cache',
+				description: 'How to handle cached soil data',
 			},
 		],
 	};
@@ -178,70 +137,86 @@ export class SoilData implements INodeType {
 
 		for (let i = 0; i < items.length; i++) {
 			try {
-				const fipsCode = this.getNodeParameter('fipsCode', i, '') as string;
-				const countyName = this.getNodeParameter('countyName', i, '') as string;
-				const stateCode = this.getNodeParameter('stateCode', i, '') as string;
+				const countyFips = this.getNodeParameter('countyFips', i) as string;
+				const outputFormat = this.getNodeParameter('outputFormat', i) as string;
+				const includeRecommendations = this.getNodeParameter('includeRecommendations', i) as boolean;
+				const cacheBehavior = this.getNodeParameter('cacheBehavior', i) as string;
 
-				// Build request body
-				const body: any = {};
-				
-				if (fipsCode) {
-					body.fipsCode = fipsCode;
-				} else if (countyName && stateCode) {
-					body.countyName = countyName;
-					body.stateCode = stateCode;
-				} else {
-					throw new Error('Either FIPS code or County Name/State Code must be provided');
+				// Validate FIPS code format (from Node-RED implementation)
+				if (!countyFips || !/^\d{5}$/.test(countyFips)) {
+					throw new Error('Valid 5-digit county FIPS code required (e.g., "06019"). Find codes at: https://www.epa.gov/waterdata/fips-code-search');
 				}
 
-				// Add operation-specific parameters
-				if (operation === 'getSoilComposition' || operation === 'getNutrientLevels') {
-					body.includeHistorical = this.getNodeParameter('includeHistorical', i, false) as boolean;
-					body.soilDepth = this.getNodeParameter('soilDepth', i, 30) as number;
-				} else if (operation === 'getSoilHealth') {
-					body.includeHistorical = this.getNodeParameter('includeHistorical', i, false) as boolean;
-				}
+				let endpoint: string;
+				let body: any = {
+					county_fips: countyFips,
+					output_format: outputFormat,
+					include_recommendations: includeRecommendations,
+					cache_behavior: cacheBehavior,
+				};
 
-				let endpoint;
+				// Map operations to endpoints (based on Node-RED implementation)
 				switch (operation) {
 					case 'getSoilComposition':
-						endpoint = '/soil/composition';
+						endpoint = '/get-soil-data';
 						break;
 					case 'getSoilHealth':
-						endpoint = '/soil/health';
+						endpoint = '/soil-health';
+						body.metrics_only = (outputFormat === 'summary' || outputFormat === 'minimal');
 						break;
 					case 'getNutrientLevels':
-						endpoint = '/soil/nutrients';
+						endpoint = '/soil-nutrients';
 						break;
 					case 'getErosionRisk':
-						endpoint = '/soil/erosion-risk';
-						break;
-					case 'getSoilRecommendations':
-						endpoint = '/soil/recommendations';
+						endpoint = '/erosion-risk';
 						break;
 					default:
 						throw new Error(`Operation "${operation}" not implemented`);
 				}
 
+				// Make API call (pattern from Node-RED)
 				const responseData = await leafEnginesApiRequest.call(this, {
 					method: 'POST',
 					url: endpoint,
 					body,
 				});
 
+				// Format response for n8n
+				const formattedData = {
+					soil: {
+						composition: responseData.composition || {},
+						healthScore: responseData.health_score || 0,
+						nutrients: responseData.nutrients || {},
+						erosionRisk: responseData.erosion_risk || {},
+						recommendations: responseData.recommendations || [],
+					},
+					metadata: {
+						county: responseData.county || {},
+						fips: countyFips,
+						timestamp: responseData.timestamp || new Date().toISOString(),
+						dataSources: responseData.data_sources || ['USDA NRCS'],
+						confidence: responseData.confidence || 0.95,
+						cacheStatus: responseData.cache_status || 'fresh',
+					},
+					raw: outputFormat === 'full' ? responseData : undefined,
+				};
+
 				const executionData = this.helpers.constructExecutionMetaData(
-					this.helpers.returnJsonArray(responseData),
+					this.helpers.returnJsonArray(formattedData),
 					{ itemData: { item: i } },
 				);
 
 				returnData.push(...executionData);
 
-			} catch (error) {
+			} catch (error: any) {
 				if (this.continueOnFail()) {
 					returnData.push({
 						json: {
 							error: error.message,
 							itemIndex: i,
+							countyFips: this.getNodeParameter('countyFips', i, '') as string,
+							operation,
+							timestamp: new Date().toISOString(),
 						},
 						pairedItem: { item: i },
 					});

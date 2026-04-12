@@ -1,0 +1,139 @@
+# n8n-nodes-leafengines
+
+[![npm version](https://img.shields.io/npm/v/n8n-nodes-leafengines.svg)](https://www.npmjs.com/package/n8n-nodes-leafengines)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+**LeafEngines Agricultural Intelligence nodes for n8n** - Business automation for agriculture.
+
+## 🚀 Quick Start
+
+### 1. Installation
+```bash
+npm install n8n-nodes-leafengines
+```
+
+### 2. Get Your API Key
+1. Visit [app.soilsidekickpro.com/api-docs](https://app.soilsidekickpro.com/api-docs)
+2. Request a sandbox API key (starts with `ak_sandbox_`)
+3. Receive key via email
+
+### 3. Configure in n8n
+1. Go to **Credentials** → **Add Credential**
+2. Search for "LeafEngines"
+3. Enter your API key and select Free tier to start
+
+### 4. Create Your First Workflow
+```
+[Schedule Trigger] → [LeafEngines Soil] → [Google Sheets] → [Email]
+```
+
+## 📊 Available Nodes
+
+### **Currently Available:**
+- **LeafEngines Soil** - USDA soil composition and health scoring
+
+### **Available in SoilSidekick Pro API (can be accessed via HTTP Request node):**
+- LeafEngines Water - EPA water quality monitoring
+- LeafEngines Crop - AI crop recommendations  
+- LeafEngines Carbon - Carbon credit calculations
+- LeafEngines Weather - Live weather and soil fusion
+- LeafEngines Batch - Optimized batch processing
+
+*Note: These additional features are available through the SoilSidekick Pro API and can be integrated using n8n's HTTP Request node. Dedicated n8n nodes for these features are planned based on community feedback.*
+
+## 🎯 Why n8n for Agriculture?
+
+n8n provides business automation capabilities that complement our Node-RED implementation for IoT/edge scenarios:
+
+| Use Case | n8n Advantage |
+|----------|---------------|
+| **Business Integration** | Connect to CRM, ERP, accounting systems |
+| **Team Collaboration** | Share workflows, version control, permissions |
+| **Enterprise Features** | Audit trails, SOC 2 compliance, logging |
+| **Agricultural Automation** | Schedule reports, data exports, notifications |
+
+## 🔧 Available Nodes
+
+### LeafEngines Soil
+Retrieve USDA soil data for any US location.
+
+**Inputs:**
+- County & State
+- Latitude & Longitude (optional)
+- Soil depth preference
+
+**Outputs:**
+- Soil composition (sand, silt, clay)
+- Nutrient levels (N, P, K)
+- Drainage classification
+- Health score (0-100)
+
+## 📖 Example Workflows
+
+### Example 1: Automated Soil Reporting
+```json
+{
+  "nodes": [
+    {
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "parameters": {"rule": {"interval": "weekly"}}
+    },
+    {
+      "name": "LeafEngines Soil",
+      "type": "n8n-nodes-leafengines.leafenginesSoil",
+      "parameters": {"county": "Fulton", "state": "GA"}
+    },
+    {
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "parameters": {"operation": "append"}
+    }
+  ]
+}
+```
+
+### Example 2: Farm Management Integration
+- **Input:** Multiple field locations via CSV
+- **Processing:** Batch soil analysis
+- **Output:** Airtable records + email alerts
+- **Integration:** Slack notifications for critical findings
+
+## ⚙️ Configuration
+
+### API Access
+- **Free Tier:** 100 requests/month, soil data only
+- **Starter Tier:** 1,000 requests/month, $49/month
+- **Pro Tier:** 10,000 requests/month, $149/month
+- **Enterprise:** Custom volumes, contact sales
+
+### Authentication
+1. Request API key from SoilSidekick Pro
+2. Configure in n8n credentials
+3. Select appropriate tier for your needs
+
+## 🔗 Related Packages
+
+- **[node-red-contrib-leafengines](https://www.npmjs.com/package/node-red-contrib-leafengines)** - For IoT/edge computing and device integration
+- **[@ancientwhispers54/leafengines-mcp-server](https://www.npmjs.com/package/@ancientwhispers54/leafengines-mcp-server)** - For AI agent integration
+- **[@soilsidekick/sdk](https://www.npmjs.com/package/@soilsidekick/sdk)** - Core JavaScript SDK for custom integrations
+
+## 🤝 Community & Development
+
+This package is actively developed with feedback from both the n8n and agricultural communities. We welcome:
+- **Feature requests** for additional n8n nodes
+- **Bug reports** and improvement suggestions
+- **Use case examples** from agricultural businesses
+
+## 📄 License
+
+MIT License
+
+Copyright (c) 2026 SoilSidekick Pro
+
+## 📞 Support
+
+- **Documentation:** [LeafEngines n8n Integration Guide](https://docs.leafengines.com/n8n)
+- **GitHub Issues:** [Feature Requests & Bugs](https://github.com/QWarranto/n8n-nodes-leafengines/issues)
+- **Email:** support@soilsidekickpro.com
+- **Community:** [n8n Community Forum](https://community.n8n.io)

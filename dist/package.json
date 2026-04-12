@@ -1,0 +1,72 @@
+{
+    "name": "n8n-nodes-leafengines",
+    "version": "1.0.3",
+    "description": "Agricultural Intelligence for n8n: Soil analysis, water quality monitoring, crop recommendations, carbon credit calculations, weather fusion, and environmental impact assessment",
+    "keywords": [
+        "n8n-community-node-package",
+        "agricultural-intelligence",
+        "soil-analysis",
+        "water-quality",
+        "crop-recommendations",
+        "carbon-credits",
+        "weather-data",
+        "environmental-impact",
+        "precision-agriculture",
+        "farm-automation",
+        "leafengines"
+    ],
+    "license": "MIT",
+    "homepage": "https://app.soilsidekickpro.com/api-docs",
+    "author": {
+        "name": "LeafEngines",
+        "email": "support@soilsidekickpro.com"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/QWarranto/n8n-nodes-leafengines.git"
+    },
+    "type": "commonjs",
+    "engines": {
+        "node": ">=18.10",
+        "n8n": ">=1.0.0"
+    },
+    "main": "index.js",
+    "scripts": {
+        "build": "tsc && gulp build:icons",
+        "dev": "tsc --watch",
+        "format": "prettier nodes credentials --write",
+        "lint": "eslint nodes credentials package.json",
+        "lintfix": "eslint nodes credentials package.json --fix",
+        "prepublishOnly": "npm run build && npm run lint -q"
+    },
+    "files": [
+        "dist"
+    ],
+    "n8n": {
+        "n8nNodesApiVersion": 1,
+        "credentials": [
+            "dist/credentials/LeafEnginesApi.credentials.js"
+        ],
+        "nodes": [
+            "dist/nodes/LeafEngines/LeafEngines.node.js",
+            "dist/nodes/LeafEngines/SoilData.node.js",
+            "dist/nodes/LeafEngines/WaterQuality.node.js",
+            "dist/nodes/LeafEngines/CropIntelligence.node.js",
+            "dist/nodes/LeafEngines/CarbonCredits.node.js",
+            "dist/nodes/LeafEngines/EnvironmentalIntelligence.node.js"
+        ]
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@typescript-eslint/parser": "^7.0.0",
+        "eslint": "^8.0.0",
+        "eslint-plugin-n8n-nodes-base": "^1.0.0",
+        "gulp": "^4.0.0",
+        "n8n-workflow": "^1.0.0",
+        "prettier": "^3.0.0",
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "axios": "^1.6.0"
+    }
+}
