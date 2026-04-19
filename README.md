@@ -69,11 +69,16 @@ npm install n8n-nodes-leafengines
 #### **Option A: Test API (Try Now)**
 Use test key: `leaf-test-370df0a2e62e`
 
-**Base URL:** `https://leafengines-emergency-api-1.onrender.com`
-**Endpoint:** `/v1/soil/analyze`
+**API Endpoint (Recommended):**
+`https://wzgnxkoeqzvueypwzvyn.supabase.co/functions/v1/get-soil-data`
+
+**Alternative Endpoint:**
+`https://leafengines-emergency-api-1.onrender.com/v1/soil/analyze`
 
 **Required Parameters:**
 - `county_fips` (5-digit code, e.g., "12086")
+
+**Optional Parameters:**
 - `county_name` (e.g., "Miami-Dade")
 - `state_code` (e.g., "FL")
 
