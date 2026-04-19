@@ -47,7 +47,17 @@ Transform n8n into an agricultural intelligence platform with:
 - **Weather Data Fusion** - NOAA climate insights, forecast integration
 - **Environmental Impact Assessment** - Sustainability metrics, compliance reporting
 
+## ⚠️ Note: npm page may show outdated information
+The npm package page may display outdated API URLs. **Use the correct endpoints below.**
+
 ## 🚀 Quick Start
+
+### API Endpoints (Use These)
+**Supabase (Recommended):**
+`https://wzgnxkoeqzvueypwzvyn.supabase.co/functions/v1/get-soil-data`
+
+**Render (Backup):**
+`https://leafengines-emergency-api-1.onrender.com/v1/soil/analyze`
 
 ### 1. Installation
 ```bash
