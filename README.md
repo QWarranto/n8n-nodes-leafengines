@@ -91,138 +91,7 @@ Use test key: `leaf-test-370df0a2e62e`
 }
 ```
 
-#### **Option B: Free Tier (No API Key Needed)**
-Use header: `x-free-tier: true`
-
-**Base URL:** `https://wzgnxkoeqzvueypwzvyn.supabase.co/functions/v1/get-soil-data`
-**Required Parameter:** Just `county_fips`
-
-**Example Request Body:**
-```json
-{
-  "county_fips": "12086"
-}
-```
-
-#### **Option C: Request Production API Key**
-1. Visit [SoilSidekick Pro API Docs](https://soilsidekickpro.com/api-docs) to request your key
-2. Or comment on our [GitHub API Access Issue](https://github.com/QWarranto/leafengines-claude-mcp/issues) with your name, email, and use case
-3. Receive your key via email within 24 hours
-
-### 3. Configure in n8n
-1. Go to **Credentials** → **Add Credential**
-2. Search for "LeafEngines"
-3. **For test key:** Enter `leaf-test-370df0a2e62e`
-4. **For free tier:** Check "Free tier" box (no API key needed)
-5. **For production key:** Enter your API key
-
-### 4. Create Your First Workflow
-```
-[Schedule Trigger] → [LeafEngines Soil] → [Google Sheets] → [Email]
-```
-
-## 📊 Available Nodes
-
-### **Currently Available:**
-- **LeafEngines Soil** - USDA soil composition and health scoring
-
-### **Available in SoilSidekick Pro API (can be accessed via HTTP Request node):**
-- LeafEngines Water - EPA water quality monitoring
-- LeafEngines Crop - AI crop recommendations  
-- LeafEngines Carbon - Carbon credit calculations
-- LeafEngines Weather - Live weather and soil fusion
-- LeafEngines Batch - Optimized batch processing
-
-*Note: These additional features are available through the SoilSidekick Pro API and can be integrated using n8n's HTTP Request node. Dedicated n8n nodes for these features are planned based on community feedback.*
-
-## 🎯 Why n8n for Agriculture?
-
-n8n provides business automation capabilities that complement our Node-RED implementation for IoT/edge scenarios:
-
-| Use Case | n8n Advantage |
-|----------|---------------|
-| **Business Integration** | Connect to CRM, ERP, accounting systems |
-| **Team Collaboration** | Share workflows, version control, permissions |
-| **Enterprise Features** | Audit trails, SOC 2 compliance, logging |
-| **Agricultural Automation** | Schedule reports, data exports, notifications |
-
-## 🔧 Available Nodes
-
-### LeafEngines Soil
-Retrieve USDA soil data for any US location.
-
-**Inputs:**
-- County & State
-- Latitude & Longitude (optional)
-- Soil depth preference
-
-**Outputs:**
-- Soil composition (sand, silt, clay)
-- Nutrient levels (N, P, K)
-- Drainage classification
-- Health score (0-100)
-
-## 📖 Example Workflows
-
-### Example 1: Automated Soil Reporting
-```json
-{
-  "nodes": [
-    {
-      "name": "Schedule Trigger",
-      "type": "n8n-nodes-base.scheduleTrigger",
-      "parameters": {"rule": {"interval": "weekly"}}
-    },
-    {
-      "name": "LeafEngines Soil",
-      "type": "n8n-nodes-leafengines.leafenginesSoil",
-      "parameters": {"county": "Fulton", "state": "GA"}
-    },
-    {
-      "name": "Google Sheets",
-      "type": "n8n-nodes-base.googleSheets",
-      "parameters": {"operation": "append"}
-    }
-  ]
-}
-```
-
-### Example 2: Farm Management Integration
-- **Input:** Multiple field locations via CSV
-- **Processing:** Batch soil analysis
-- **Output:** Airtable records + email alerts
-- **Integration:** Slack notifications for critical findings
-
 ## ⚙️ Configuration
-
-## 💰 Founder Pricing (First 100 Only)
-
-Act now to lock in lifetime rates. After the first 100 founders or 30 days, pricing increases to normal rates.
-
-| Tier | First 30 Days | After 30 Days (Lifetime Lock) | Normal Price |
-|------|--------------|-------------------------------|-------------|
-| **Starter** | $10/mo | $49/mo for life | $149/mo |
-| **Pro** | $49/mo | $149/mo for life | $499/mo |
-
-### Get Started Now
-- **Starter:** [Subscribe for $10/month](https://buy.stripe.com/14A7sL30y8bR2F4fbgaMU02) *(Limited to first 100)*
-- **Pro:** [Subscribe for $49/month](https://buy.stripe.com/cNi3cv1WuajZcfE7IOaMU03) *(Limited to first 100)*
-
-After payment, you'll receive your API key within 24 hours.
-
-### Alternative Payment Methods
-- PayPal: `teamclreg@gmail.com`
-- Cash App: `$Sumer54`
-- Venmo: `@Reginald-Rice`
-- Bitcoin, Ethereum, Solana (addresses provided on request)
-
-## 📊 Normal Pricing (After Founder Period)
-
-| Plan | Price | Subscribe |
-|------|-------|-----------|
-| Starter | $149/mo | [Subscribe](https://buy.stripe.com/5kQ6oHcB88bR93s8MSaMU04) |
-| Pro | $499/mo | [Subscribe](https://buy.stripe.com/14A6oH7gO3VBcfE1kqaMU05) |
-| Enterprise | $1,999/mo | [Subscribe](https://buy.stripe.com/eVqaEXfNkajZ6Vk0gmaMU06) |
 
 ## ⚡ Why Act Now?
 
@@ -254,6 +123,53 @@ MIT License
 
 Copyright (c) 2026 SoilSidekick Pro
 
+
+## 🆓 Free Tier - Test n8n Nodes Immediately
+
+**Zero friction to try:** No email, no credit card, no commitment.
+
+### **Two Ways to Test Free:**
+1. **Test Key:** `leaf-test-370df0a2e62e` (works immediately with any API call)
+2. **Free Tier Header:** `x-free-tier: true` (no API key needed at all)
+
+### **What You Get with Free Tier:**
+- ✅ **Basic soil analysis** with county FIPS codes
+- ✅ **USDA soil data** access
+- ✅ **Limited requests** (enough for evaluation)
+- ✅ **Perfect for** prototyping, testing, evaluation
+- ✅ **No time limit** - use as needed for testing
+
+**No risk, no commitment.** Test our agricultural intelligence with real data.
+
+## 💰 Pricing - International & Transparent
+
+**n8n Node Pricing:** These nodes work with LeafEngines' agricultural intelligence API.
+
+### **Monthly Subscription Plans (Recommended):**
+
+| Region | Starter | Pro | Local Payment Methods |
+|--------|---------|-----|----------------------|
+| **United States** | $49/mo | $149/mo | Card, Apple Pay, Google Pay, Affirm |
+| **European Union** | €45/mo (VAT incl.) | €135/mo (VAT incl.) | Klarna (DE), iDEAL (NL), EPS (AT), Apple/Google Pay |
+| **United Kingdom** | £38/mo (VAT incl.) | £115/mo (VAT incl.) | Afterpay/Clearpay, Apple/Google Pay |
+| **Australia** | AU$75/mo (GST incl.) | AU$225/mo (GST incl.) | Afterpay, Apple/Google Pay |
+| **International** | $49/mo* | $149/mo* | Credit Cards, Apple/Google Pay |
+
+*Equivalent local currency at checkout*
+
+### **Founder Pricing (First 100 Customers Only):**
+- **Lifetime pricing lock** - Price never increases
+- **First 100 customers only** - Based on timestamp
+- **Applies to all currencies** - USD, EUR, GBP, AUD
+- **Limited time offer** - After 100 founders, normal pricing
+
+### **Pay-As-You-Go (Alternative):**
+- **Commoditized:** $0.01/request (public data)
+- **Enhanced:** $0.10/request (AI processing)
+- **Proprietary:** $0.25/request (internal models)
+- **EXCLUSIVE:** $0.50/request (patent-pending)
+
+**Free tier available for testing → Upgrade when ready**
 ## 📞 Support
 
 - **Documentation:** [LeafEngines n8n Integration Guide](https://docs.leafengines.com/n8n)
