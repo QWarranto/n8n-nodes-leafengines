@@ -29,10 +29,22 @@ npm install n8n-nodes-leafengines
    - Endpoint: `/v1/soil/analyze`
    - No signup required - works immediately
 
-2. **Future Production API (Coming Soon):**
-   - Visit [leafengines.com/api](https://leafengines.com/api) (coming soon)
-   - Request production API key
-   - Receive key via email
+2. **Production API :**
+   - Visit [leafengines.com/api](https://leafengines.com/api)
+#### 1. Get API Key
+Immediate access with test key: leaf-test-370df0a2e62e
+No forms, no waiting, no approval
+Works across all platforms
+**Test key gives you:**n- Full soil analysis capabilitiesn- Crop recommendationsn- All free tier features
+
+✅ Try It Now (No Waiting
+Use test key: leaf-test-370df0a2e62e
+Immediate access to several key features
+
+
+For premium access
+Visit: [https://soilsidekickpro.com/api-docs](https://soilsidekickpro.com/api-docs)
+    
 
 ### 3. Configure in n8n
 1. Go to **Credentials** → **Add Credential**
