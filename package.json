@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-leafengines",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Agricultural Intelligence for n8n - Free tier access, no API key needed. USDA soil data, EPA water quality, crop recommendations. Works immediately with test key leaf-test-370df0a2e62e.",
   "keywords": [
     "n8n-community-node-package",
