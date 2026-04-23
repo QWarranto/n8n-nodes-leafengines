@@ -39,7 +39,7 @@ function validateTierAccess(tier, operation) {
 }
 async function leafEnginesApiRequest(options) {
     const credentials = await this.getCredentials('leafEnginesApi');
-    const apiKey = credentials.apiKey;
+    const apiKey = credentials.apiKey || '';
     const environment = credentials.environment || 'sandbox';
     const baseUrl = API_BASE_URLS[environment];
     if (!baseUrl) {
@@ -49,9 +49,9 @@ async function leafEnginesApiRequest(options) {
         url: `${baseUrl}${options.url}`,
         method: options.method,
         headers: {
-            'x-api-key': apiKey,
             'Content-Type': 'application/json',
-            'User-Agent': 'n8n-nodes-leafengines/1.0.0',
+            'User-Agent': 'n8n-nodes-leafengines/1.0.3',
+            ...(apiKey ? { 'x-api-key': apiKey } : { 'x-free-tier': 'true' }),
             ...options.headers,
         },
         body: options.body,

@@ -58,7 +58,7 @@ export async function leafEnginesApiRequest(
 	}
 ): Promise<any> {
 	const credentials = await this.getCredentials('leafEnginesApi');
-	const apiKey = credentials.apiKey as string;
+	const apiKey = (credentials.apiKey as string) || '';
 	const environment = (credentials.environment as string) || 'sandbox';
 
 	const baseUrl = API_BASE_URLS[environment as keyof typeof API_BASE_URLS];
@@ -70,9 +70,9 @@ export async function leafEnginesApiRequest(
 		url: `${baseUrl}${options.url}`,
 		method: options.method,
 		headers: {
-			'x-api-key': apiKey,
 			'Content-Type': 'application/json',
-			'User-Agent': 'n8n-nodes-leafengines/1.0.0',
+			'User-Agent': 'n8n-nodes-leafengines/1.0.3',
+			...(apiKey ? { 'x-api-key': apiKey } : { 'x-free-tier': 'true' }),
 			...options.headers,
 		},
 		body: options.body,

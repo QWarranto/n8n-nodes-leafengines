@@ -4,16 +4,16 @@ exports.LeafEnginesApi = void 0;
 class LeafEnginesApi {
     name = 'leafEnginesApi';
     displayName = 'LeafEngines API';
-    documentationUrl = 'https://leafengines.example.com/api-docs';
+    documentationUrl = 'https://soilsidekickpro.com/api-docs';
     properties = [
         {
             displayName: 'API Key',
             name: 'apiKey',
             type: 'string',
             typeOptions: { password: true },
-            default: '',
-            description: 'Your LeafEngines API key. Get one at app.soilsidekickpro.com',
-            required: true,
+            default: 'leaf-test-370df0a2e62e',
+            description: 'Your LeafEngines API key. Use test key "leaf-test-370df0a2e62e" to try immediately. Get production key at https://soilsidekickpro.com/api-docs',
+            required: false,
         },
         {
             displayName: 'Environment',

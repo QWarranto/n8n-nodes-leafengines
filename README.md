@@ -1,6 +1,8 @@
 
 ## 🎯 QGIS Plugin Officially Approved!
 
+## 🚀 FREE TIER: NO API KEY NEEDED!nn**Immediate access with test key:** `leaf-test-370df0a2e62e`nn### ✅ Try It Now (No Waiting):nn1. **Use test key:** `leaf-test-370df0a2e62e`n2. **Immediate access** to all featuresn3. **No forms, no waiting, no approval**n4. **Works across all platforms**nn**Test key gives you:**n- Full soil analysis capabilitiesn- Crop recommendationsn- Weather datan- Environmental impact assessmentn- All free tier featuresnn---nn**Want higher limits or commercial use?** Get instant API keys via [Stripe checkout](https://buy.stripe.com/14A7sL30y8bR2F4fbgaMU02) (Starter: $49 Founder Pricing).
+
 **Plugin ID:** 4987 (LeafEngines Agricultural Intelligence)  
 **Version:** 1.0.2 Experimental  
 **Status:** ✅ **PUBLICLY AVAILABLE**  
