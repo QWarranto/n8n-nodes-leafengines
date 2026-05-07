@@ -1,7 +1,7 @@
 {
     "name": "n8n-nodes-leafengines",
-    "version": "1.0.3",
-    "description": "Agricultural Intelligence for n8n: Soil analysis, water quality monitoring, crop recommendations, carbon credit calculations, weather fusion, and environmental impact assessment",
+    "version": "1.0.5",
+    "description": "Agricultural Intelligence for n8n - Free tier access, no API key needed. USDA soil data, EPA water quality, crop recommendations. Works immediately with test key leaf-test-370df0a2e62e.",
     "keywords": [
         "n8n-community-node-package",
         "agricultural-intelligence",
@@ -12,11 +12,17 @@
         "weather-data",
         "environmental-impact",
         "precision-agriculture",
+        "geospatial",
+        "offline-first",
+        "agronomic-ai",
+        "ai-agent",
+        "llm-tools",
+        "model-context-protocol",
         "farm-automation",
         "leafengines"
     ],
     "license": "MIT",
-    "homepage": "https://app.soilsidekickpro.com/api-docs",
+    "homepage": "https://soilsidekickpro.com/api-docs",
     "author": {
         "name": "LeafEngines",
         "email": "support@soilsidekickpro.com"
