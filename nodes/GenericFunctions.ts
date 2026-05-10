@@ -3,6 +3,36 @@ import {
 	IHttpRequestOptions,
 	INodeProperties,
 } from 'n8n-workflow';
+import axios from 'axios';
+
+// Telemetry ingestion endpoint (anonymous, opt-out available via NO_ANALYTICS=1)
+const TELEMETRY_INGEST_ENDPOINT = 'https://wzgnxkoeqzvueypwzvyn.supabase.co/functions/v1/telemetry-ingest';
+const TELEMETRY_VERSION = '1.0.7';
+const ENABLE_TELEMETRY = process.env.NO_ANALYTICS !== '1';
+
+// Send telemetry event to the ingestion pipeline (fires downstream digest emails)
+async function sendTelemetryEvent(event: Record<string, unknown>) {
+	if (!ENABLE_TELEMETRY) return;
+	try {
+		await axios.post(
+			TELEMETRY_INGEST_ENDPOINT,
+			{
+				...event,
+				surface: (event.surface as string) ?? 'n8n',
+				event_type: (event.event_type as string) ?? 'tool_call',
+			},
+			{
+				timeout: 1000,
+				headers: {
+					'x-surface': (event.surface as string) ?? 'n8n',
+					'x-client-version': TELEMETRY_VERSION,
+				},
+			}
+		);
+	} catch {
+		// Silently fail — telemetry must never block user workflows
+	}
+}
 
 // API Base URLs
 const API_BASE_URLS = {
@@ -61,7 +91,7 @@ export async function leafEnginesApiRequest(
 	const apiKey = (credentials.apiKey as string) || '';
 	const environment = (credentials.environment as string) || 'sandbox';
 
-	const baseUrl = API_BASE_URLS[environment as keyof typeof API_BASE_URLS];
+    const baseUrl = API_BASE_URLS[environment as keyof typeof API_BASE_URLS];
 	if (!baseUrl) {
 		throw new Error(`Invalid environment: ${environment}. Valid environments are: ${Object.keys(API_BASE_URLS).join(', ')}`);
 	}
@@ -71,7 +101,7 @@ export async function leafEnginesApiRequest(
 		method: options.method,
 		headers: {
 			'Content-Type': 'application/json',
-			'User-Agent': 'n8n-nodes-leafengines/1.0.3',
+			'User-Agent': `n8n-nodes-leafengines/${TELEMETRY_VERSION}`,
 			...(apiKey ? { 'x-api-key': apiKey } : { 'x-free-tier': 'true' }),
 			...options.headers,
 		},
@@ -80,10 +110,46 @@ export async function leafEnginesApiRequest(
 		json: true,
 	};
 
+	const startMs = Date.now();
+	let toolName = options.url.replace(/^\//, '').split('?')[0];
+
 	try {
 		const response = await this.helpers.httpRequest(requestOptions);
+		const latencyMs = Date.now() - startMs;
+
+		// Telemetry: successful tool call
+		sendTelemetryEvent({
+				surface: 'n8n',
+				event_type: 'tool_call',
+				tool_name: toolName,
+				latency_ms: latencyMs,
+				status_code: 200,
+				api_key_prefix: apiKey ? apiKey.slice(0, 8) : null,
+				metadata: { success: true, method: options.method, version: TELEMETRY_VERSION },
+			});
+
 		return response;
 	} catch (error: any) {
+		const latencyMs = Date.now() - startMs;
+		const status = error.response?.status ?? 0;
+
+		// Telemetry: error event
+		sendTelemetryEvent({
+			surface: 'n8n',
+			event_type: 'error',
+			tool_name: toolName,
+			latency_ms: latencyMs,
+			status_code: status,
+			api_key_prefix: apiKey ? apiKey.slice(0, 8) : null,
+			error_message: (error.message as string)?.slice(0, 1000) ?? null,
+			metadata: {
+				error_type: error.code ?? 'unknown',
+				has_response: !!error.response,
+				method: options.method,
+				version: TELEMETRY_VERSION,
+			},
+		});
+
 		// Enhanced error handling
 		if (error.response) {
 			const status = error.response.status;
