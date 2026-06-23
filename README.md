@@ -44,7 +44,7 @@ Immediate access to several key features
 For premium access
 - **Starter:** normally $149/month (5k commoditized + 3k enhanced + 1.5k proprietary + 500 exclusive)
 - or via Stripe checkout (Starter: $49 Founder Pricing vs $149/mo after June 1, 2026)
-- ->https://buy.stripe.com/14A7sL30y8bR2F4fbgaMU02
+- ->https://buy.stripe.com/5kQ6oHcB88bR93s8MSaMU04
 - Or, Visit: [https://soilsidekickpro.com/api-docs](https://soilsidekickpro.com/api-docs) 
     
 
