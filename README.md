@@ -42,10 +42,13 @@ Use test key: leaf-test-370df0a2e62e
 Immediate access to several key features
 
 For premium access
-- **Starter:** normally $149/month (5k commoditized + 3k enhanced + 1.5k proprietary + 500 exclusive)
-- or via Stripe checkout (Starter: $49 Founder Pricing vs $149/mo after June 1, 2026)
-- ->https://buy.stripe.com/5kQ6oHcB88bR93s8MSaMU04
-- Or, Visit: [https://soilsidekickpro.com/api-docs](https://soilsidekickpro.com/api-docs) 
+| **Starter** | $149/month | 5k commoditized + 3k enhanced + 1.5k proprietary + 500 exclusive |
+| **Pro** | $499/month | 20k commoditized + 10k enhanced + 5k proprietary + 2k exclusive |
+| **Enterprise** | $1,999/month | Unlimited + SLA + dedicated support |
+
+Subscribe: [Starter](https://buy.stripe.com/5kQ6oHcB88bR93s8MSaMU04) | [Pro](https://buy.stripe.com/14A6oH7gO3VBcfE1kqaMU05) | [Enterprise](https://buy.stripe.com/eVqaEXfNkajZ6Vk0gmaMU06)
+
+Or visit: [https://soilsidekickpro.com/api-docs](https://soilsidekickpro.com/api-docs) 
     
 
 ### 3. Configure in n8n
