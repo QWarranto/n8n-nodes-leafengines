@@ -1,9 +1,13 @@
 # n8n-nodes-leafengines
 
+> 🏆 **Global Startup Awards 2026 — North America Regional Nominee**
+
 [![npm version](https://img.shields.io/npm/v/n8n-nodes-leafengines.svg)](https://www.npmjs.com/package/n8n-nodes-leafengines)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Agricultural Intelligence for n8n** - Business automation for precision agriculture.
+**Agricultural Intelligence for n8n** — Business automation for precision agriculture.
+
+> 🏆 **A-Excellent Verified** on MCP World (June 2026) · QGIS Plugin approved (ID 4987) · SDK v3.0 hardware-ready · 750+ developers globally
 
 ## 🎯 What This Package Does
 
